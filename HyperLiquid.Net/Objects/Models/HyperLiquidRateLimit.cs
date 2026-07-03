@@ -20,6 +20,11 @@ namespace HyperLiquid.Net.Objects.Models
         [JsonPropertyName("nRequestsUsed")]
         public long RequestsUsed { get; set; }
         /// <summary>
+        /// ["<c>nRequestsSurplus</c>"] Request surplus
+        /// </summary>
+        [JsonPropertyName("nRequestsSurplus")]
+        public long RequestSurplus { get; set; }
+        /// <summary>
         /// ["<c>nRequestsCap</c>"] Request quota
         /// </summary>
         [JsonPropertyName("nRequestsCap")]
