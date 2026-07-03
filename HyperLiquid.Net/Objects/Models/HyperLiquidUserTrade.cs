@@ -106,6 +106,11 @@ namespace HyperLiquid.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("twapId")]
         public long? TwapId { get; set; }
+        /// <summary>
+        /// ["<c>cloid</c>"] Client order id
+        /// </summary>
+        [JsonPropertyName("cloid")]
+        public string? ClientOrderId { get; set; }
     }
 
     /// <summary>
