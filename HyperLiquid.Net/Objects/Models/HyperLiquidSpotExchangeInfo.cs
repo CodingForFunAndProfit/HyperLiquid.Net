@@ -146,6 +146,11 @@ namespace HyperLiquid.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("fullName")]
         public string FullName { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>deployerTradingFeeShare</c>"] Deployer trading fee share
+        /// </summary>
+        [JsonPropertyName("deployerTradingFeeShare")]
+        public decimal DeployerTradingFeeShare { get; set; } 
     }
 
     /// <summary>
