@@ -834,7 +834,7 @@ namespace HyperLiquid.Net.Clients.BaseApi
                 }
 
                 orderParameters.Add("t", orderTypeParameters);
-                orderParameters.Add("c", order.ClientOrderId);
+                orderParameters.Add("c", order.NewClientOrderId);
 
                 modifyParameters.Add("order", orderParameters);
                 orderRequests.Add(modifyParameters);
