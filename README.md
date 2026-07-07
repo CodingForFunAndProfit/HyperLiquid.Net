@@ -209,6 +209,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.1.0 - 07 Jul 2026
+    * Added restClient.SpotApi.Account.GetSubAccounts2Async endpoint
+    * Added CollateralTokenIndex and CollateralToken to HyperLiquidFuturesDexInfo model
+    * Added ClientOrderId to HyperLiquidUserTrade model
+    * Added DeployerTradingFeeShare to HyperLiquidAsset model
+    * Added RequestSurplus to HyperLiquidRateLimit model
+    * Updated futures GetExchangeInfoAsync response type to HyperLiquidFuturesDexInfo
+    * Fixed EditOrdersAsync using ClientOrderId instead of NewClientOrderId for the replacement order
+
 * Version 5.0.0 - 29 Jun 2026
     * Result types:
       * (Web)CallResult types are replaced by HttpResult, WebSocketResult and QueryResult with the same logic
