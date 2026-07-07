@@ -36,7 +36,7 @@ namespace HyperLiquid.Net.Interfaces.Clients.FuturesApi
         /// </summary>
         /// <param name="dex">["<c>dex</c>"] DEX name, for example `xyz`, null for default Perp DEX</param>
         /// <param name="ct">Cancellation token</param>
-        Task<HttpResult<HyperLiquidFuturesSymbol[]>> GetExchangeInfoAsync(string? dex = null, CancellationToken ct = default);
+        Task<HttpResult<HyperLiquidFuturesDexInfo>> GetExchangeInfoAsync(string? dex = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get exchange info for all perp dexes

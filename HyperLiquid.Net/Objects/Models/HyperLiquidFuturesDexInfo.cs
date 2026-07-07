@@ -18,8 +18,16 @@ namespace HyperLiquid.Net.Objects.Models
         /// </summary>
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Index of the DEX
+        /// Index of the DEX (only filled for GetExchangeInfoAllDexesAsync)
         /// </summary>
-        public int Index { get; set; }
+        public int? Index { get; set; }
+        /// <summary>
+        /// Collateral token index
+        /// </summary>
+        public int CollateralTokenIndex { get; set; }
+        /// <summary>
+        /// Collateral token name
+        /// </summary>
+        public string? CollateralToken { get; set; }
     }
 }

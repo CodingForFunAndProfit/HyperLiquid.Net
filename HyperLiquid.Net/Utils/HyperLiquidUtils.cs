@@ -331,7 +331,7 @@ namespace HyperLiquid.Net.Utils
                     if (symbol == null)
                         return CallResult.Fail<int>(new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, "Symbol not found")));
 
-                    return CallResult.Ok(100000 + dex.Index * 10000 + symbol.Index);
+                    return CallResult.Ok(100000 + dex.Index!.Value * 10000 + symbol.Index);
                 }
                 else
                 {
@@ -561,6 +561,43 @@ namespace HyperLiquid.Net.Utils
                 return CallResult.Fail<string>(new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
 
             return CallResult.Ok<string>(assetInfo.Name + ":" + assetInfo.AssetId);
+        }
+
+        /// <summary>
+        /// Get asset name by index
+        /// </summary>
+        public static async Task<ICallResult<string>> GetAssetNameByIndexAsync(HyperLiquidRestClient client, int index)
+        {
+            var envName = client.ClientOptions.Environment.Name;
+            if (envName.Equals("UnitTest", StringComparison.Ordinal))
+                return CallResult.Ok("USDC");
+
+            return await GetAssetNameByIndexAsync(envName, index, () => UpdateSpotSymbolInfoAsync(client)).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get asset name by index
+        /// </summary>
+        public static async Task<ICallResult<string>> GetAssetNameByIndexAsync(HyperLiquidSocketClient client, int index)
+        {
+            var envName = client.ClientOptions.Environment.Name;
+            if (envName.Equals("UnitTest", StringComparison.Ordinal))
+                return CallResult.Ok("USDC");
+
+            return await GetAssetNameByIndexAsync(envName, index, () => UpdateSpotSymbolInfoAsync(client)).ConfigureAwait(false);
+        }
+
+        private static async Task<CallResult<string>> GetAssetNameByIndexAsync(string envName, int index, Func<Task<ICallResult>> spotUpdate)
+        {
+            var update = await spotUpdate().ConfigureAwait(false);
+            if (!update.Success)
+                return CallResult.Fail<string>(update.Error!);
+
+            var assetInfo = _spotAssetInfo[envName].SingleOrDefault(x => x.Index == index);
+            if (assetInfo == null)
+                return CallResult.Fail<string>(new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
+
+            return CallResult.Ok<string>(assetInfo.Name);
         }
 
         /// <summary>

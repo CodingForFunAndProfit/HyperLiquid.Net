@@ -19,6 +19,11 @@ namespace HyperLiquid.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("marginTables")]
         public HyperLiquidMarginTable[] MarginTables { get; set; } = [];
+        /// <summary>
+        /// ["<c>collateralToken</c>"] Collateral token
+        /// </summary>
+        [JsonPropertyName("collateralToken")]
+        public int CollateralToken { get; set; }
     }
 
     /// <summary>

@@ -10,6 +10,8 @@ using HyperLiquid.Net.Clients.BaseApi;
 using HyperLiquid.Net.Interfaces.Clients.FuturesApi;
 using CryptoExchange.Net.Objects.Errors;
 using System.Net;
+using HyperLiquid.Net.Utils;
+using System.Collections.Generic;
 
 namespace HyperLiquid.Net.Clients.FuturesApi
 {
@@ -73,23 +75,29 @@ namespace HyperLiquid.Net.Clients.FuturesApi
                 }
             }
 
-            int index = 0;
-            return HttpResult.Ok(result, result.Data.Select(x =>
+            var results = new List<HyperLiquidFuturesDexInfo>();
+            for(var i = 0; i < result.Data.Length; i++)
             {
-                var symbolName = x.Symbols.FirstOrDefault()?.Name;
-                return new HyperLiquidFuturesDexInfo
+                var data = result.Data[i];
+                var symbolName = data.Symbols.FirstOrDefault()?.Name;
+                var collateralTokenName = await HyperLiquidUtils.GetAssetNameByIndexAsync(_baseClient.BaseClient, data.CollateralToken).ConfigureAwait(false);
+                results.Add(new HyperLiquidFuturesDexInfo
                 {
                     Name = symbolName?.Contains(':') == true ? symbolName.Split(':')[0] : "default",
-                    Symbols = x.Symbols,
-                    Index = index++
-                };
-            }).ToArray());
+                    Symbols = data.Symbols,
+                    CollateralTokenIndex = data.CollateralToken,
+                    CollateralToken = collateralTokenName.Data,
+                    Index = i
+                });
+            }
+
+            return HttpResult.Ok(result, results.ToArray());
         }
 
         #region Get Futures Exchange Info
 
         /// <inheritdoc />
-        public async Task<HttpResult<HyperLiquidFuturesSymbol[]>> GetExchangeInfoAsync(string? dex = null, CancellationToken ct = default)
+        public async Task<HttpResult<HyperLiquidFuturesDexInfo>> GetExchangeInfoAsync(string? dex = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(HyperLiquidExchange._parameterSerializationSettings)
             {
@@ -100,7 +108,7 @@ namespace HyperLiquid.Net.Clients.FuturesApi
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "info", HyperLiquidExchange.RateLimiter.HyperLiquidRest, 20, false);
             var result = await _baseClient.SendAsync<HyperLiquidFuturesExchangeInfo>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return HttpResult.Fail<HyperLiquidFuturesSymbol[]>(result);
+                return HttpResult.Fail<HyperLiquidFuturesDexInfo>(result);
 
             for (var i = 0; i < result.Data.Symbols.Count(); i++)
             {
@@ -124,7 +132,17 @@ namespace HyperLiquid.Net.Clients.FuturesApi
                 }
             }
 
-            return HttpResult.Ok(result, result.Data.Symbols);
+            var symbolName = result.Data.Symbols.FirstOrDefault()?.Name;
+            var collateralTokenName = await HyperLiquidUtils.GetAssetNameByIndexAsync(_baseClient.BaseClient, result.Data.CollateralToken).ConfigureAwait(false);
+            var info = new HyperLiquidFuturesDexInfo
+            {
+                Name = symbolName?.Contains(':') == true ? symbolName.Split(':')[0] : "default",
+                Symbols = result.Data.Symbols,
+                CollateralTokenIndex = result.Data.CollateralToken,
+                CollateralToken = collateralTokenName.Data
+            }; 
+
+            return HttpResult.Ok(result, info);
         }
 
         #endregion
