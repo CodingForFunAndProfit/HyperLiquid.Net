@@ -218,14 +218,21 @@ namespace HyperLiquid.Net.Interfaces.Clients.BaseApi
         /// <summary>
         /// Get sub account list
         /// </summary>
-        /// <param name="address">["<c>user</c>"] Address to request balances for. If not provided will use the address provided in the API credentials</param>
+        /// <param name="address">["<c>user</c>"] Address to request sub accounts for. If not provided will use the address provided in the API credentials</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<HyperLiquidSubAccount[]>> GetSubAccountsAsync(string? address = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get sub account list for Unified / Portfolio margin enabled account
+        /// </summary>
+        /// <param name="address">["<c>user</c>"] Address to request sub accounts for. If not provided will use the address provided in the API credentials</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<HyperLiquidSubAccount2[]>> GetSubAccounts2Async(string? address = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get user role
         /// </summary>
-        /// <param name="address">["<c>user</c>"] Address to request balances for. If not provided will use the address provided in the API credentials</param>
+        /// <param name="address">["<c>user</c>"] Address to request user role for. If not provided will use the address provided in the API credentials</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<HyperLiquidUserRole>> GetUserRoleAsync(string? address = null, CancellationToken ct = default);
 

@@ -383,6 +383,31 @@ namespace HyperLiquid.Net.Clients.BaseApi
 
         #endregion
 
+        #region Get Sub account list
+
+        /// <inheritdoc />
+        public async Task<HttpResult<HyperLiquidSubAccount2[]>> GetSubAccounts2Async(string? address = null, CancellationToken ct = default)
+        {
+            await HyperLiquidUtils.CheckBuilderFeeAsync(_baseClient.BaseClient).ConfigureAwait(false);
+
+            var parameters = new Parameters(HyperLiquidExchange._parameterSerializationSettings)
+            {
+                { "type", "subAccounts2" },
+                { "user", address ?? _baseClient.AuthenticationProvider!.Key }
+            };
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "info", HyperLiquidExchange.RateLimiter.HyperLiquidRest, 20, false);
+            var result = await _baseClient.SendAsync<HyperLiquidSubAccount2[]>(request, parameters, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return result;
+
+            if (result.Data == null)
+                return HttpResult.Ok(result, new HyperLiquidSubAccount2[0]);
+
+            return result;
+        }
+
+        #endregion
+
         #region Get User Role
 
         /// <inheritdoc />

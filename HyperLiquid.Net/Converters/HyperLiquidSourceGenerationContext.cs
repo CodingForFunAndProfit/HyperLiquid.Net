@@ -33,6 +33,7 @@ namespace HyperLiquid.Net.Converters
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidRateLimit>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<int>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidSubAccount[]>>))]
+    [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidSubAccount2[]>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidUserRole>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidUserAgent[]>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidStakingDelegation[]>>))]
