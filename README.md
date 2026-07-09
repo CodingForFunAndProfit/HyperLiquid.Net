@@ -209,6 +209,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.2.0 - 09 Jul 2026
+    * Updated CryptoExchange.Net to v12.1.0
+
 * Version 5.1.0 - 07 Jul 2026
     * Added restClient.SpotApi.Account.GetSubAccounts2Async endpoint
     * Added CollateralTokenIndex and CollateralToken to HyperLiquidFuturesDexInfo model
