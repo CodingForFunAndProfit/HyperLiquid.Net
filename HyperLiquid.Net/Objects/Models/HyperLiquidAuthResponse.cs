@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using HyperLiquid.Net.Converters;
+using System.Text.Json.Serialization;
 
 namespace HyperLiquid.Net.Objects.Models
 {
@@ -22,6 +23,7 @@ namespace HyperLiquid.Net.Objects.Models
         public T Data { get; set; } = default!;
     }
 
+    [JsonConverter(typeof(HyperLiquidDefaultConverter))]
     internal record HyperLiquidDefault
     {
         [JsonPropertyName("type")]

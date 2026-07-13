@@ -771,7 +771,7 @@ namespace HyperLiquid.Net.Clients.BaseApi
             _baseClient.AddExpiresAfter(parameters, expiresAfter);
 
             var result = await _baseClient.QueryInternalAsync(
-                new HyperLiquidRequestQuery<object>(_baseClient, "post", "action", parameters, true), ct).ConfigureAwait(false);
+                new HyperLiquidRequestQuery2<HyperLiquidDefault>(_baseClient, "post", "action", parameters), ct).ConfigureAwait(false);
             return result;
         }
 

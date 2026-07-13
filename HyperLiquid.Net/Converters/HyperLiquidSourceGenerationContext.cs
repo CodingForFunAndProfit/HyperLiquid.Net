@@ -2,12 +2,15 @@ using CryptoExchange.Net.Objects;
 using HyperLiquid.Net.Enums;
 using HyperLiquid.Net.Objects.Internal;
 using HyperLiquid.Net.Objects.Models;
+using HyperLiquid.Net.Objects.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace HyperLiquid.Net.Converters
 {
+    [JsonSerializable(typeof(HyperLiquidSocketMessage2<HyperLiquidSocketEnvelope2<HyperLiquidSocketResponse2<HyperLiquidSocketPayload2<HyperLiquidDefault>>>>))]
+
     [JsonSerializable(typeof(Parameters))]
     [JsonSerializable(typeof(Parameters[]))]
     [JsonSerializable(typeof(List<Parameters>))]

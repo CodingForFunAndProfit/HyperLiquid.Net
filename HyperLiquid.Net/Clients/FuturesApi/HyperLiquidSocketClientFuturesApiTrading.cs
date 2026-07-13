@@ -65,7 +65,7 @@ namespace HyperLiquid.Net.Clients.FuturesApi
             _baseClient.AddExpiresAfter(parameters, expiresAfter);
 
             return await _baseClient.QueryInternalAsync(
-                new HyperLiquidRequestQuery<object>(_baseClient, "post", "action", parameters, true), ct).ConfigureAwait(false);
+                new HyperLiquidRequestQuery2<HyperLiquidDefault>(_baseClient, "post", "action", parameters), ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -101,7 +101,7 @@ namespace HyperLiquid.Net.Clients.FuturesApi
             _baseClient.AddExpiresAfter(parameters, expiresAfter);
 
             return await _baseClient.QueryInternalAsync(
-                new HyperLiquidRequestQuery<object>(_baseClient, "post", "action", parameters, true), ct).ConfigureAwait(false);
+                new HyperLiquidRequestQuery2<HyperLiquidDefault>(_baseClient, "post", "action", parameters), ct).ConfigureAwait(false);
         }
 
         #endregion
