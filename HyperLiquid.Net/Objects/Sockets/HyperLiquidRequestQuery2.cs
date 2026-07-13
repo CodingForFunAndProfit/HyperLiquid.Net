@@ -15,9 +15,9 @@ namespace HyperLiquid.Net.Objects.Sockets
     internal record HyperLiquidSocketMessage2<T>
     {
         [JsonPropertyName("channel")]
-        public string Channel { get; set; }
+        public string Channel { get; set; } = string.Empty;
         [JsonPropertyName("data")]
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
     }
 
     internal record HyperLiquidSocketEnvelope2<T>
@@ -25,23 +25,23 @@ namespace HyperLiquid.Net.Objects.Sockets
         [JsonPropertyName("id")]
         public long Id { get; set; }
         [JsonPropertyName("response")]
-        public T Response { get; set; }
+        public T Response { get; set; } = default!;
     }
 
     internal record HyperLiquidSocketResponse2<T>
     {
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         [JsonPropertyName("payload")]
-        public T Payload { get; set; }
+        public T Payload { get; set; } = default!;
     }
 
     internal record HyperLiquidSocketPayload2<T>
     {
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         [JsonPropertyName("response")]
-        public T Response { get; set; }
+        public T Response { get; set; } = default!;
     }
 
 

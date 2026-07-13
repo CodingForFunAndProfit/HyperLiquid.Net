@@ -13,7 +13,7 @@ namespace HyperLiquid.Net.Converters
             if (reader.TokenType == JsonTokenType.StartObject)
             {
                 var result = JsonSerializer.Deserialize<HyperLiquidDefault>(ref reader, (JsonTypeInfo<HyperLiquidDefault>)options.GetTypeInfo(typeof(HyperLiquidDefault)));
-                return result;
+                return result!;
             }
             else
             {
