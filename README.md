@@ -209,6 +209,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 5.2.1 - 13 Jul 2026
+    * Fixed deserialization for EditOrderAsync, ToggleHip3DexAbstractionAsync, SetLeverageAsync and UpdateIsolatedMarginAsync websocket requests when response is an error
+
 * Version 5.2.0 - 09 Jul 2026
     * Updated CryptoExchange.Net to v12.1.0
 
