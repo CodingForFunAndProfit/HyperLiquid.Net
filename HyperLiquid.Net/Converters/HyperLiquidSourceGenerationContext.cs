@@ -20,6 +20,7 @@ namespace HyperLiquid.Net.Converters
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidSettledOutcome>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidSocketResponse<HyperLiquidQuestionsAndOutcomesInfo>>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidOutcomeUpdate[]>))]
+    [JsonSerializable(typeof(HyperLiquidUserVaultEquity[]))]
 
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidOpenOrderUpdate>))]
     [JsonSerializable(typeof(HyperLiquidSocketUpdate<HyperLiquidPositionUpdate>))]

@@ -1,12 +1,13 @@
 using CryptoExchange.Net.Objects;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
-using HyperLiquid.Net.Objects.Models;
-using System;
-using HyperLiquid.Net.Utils;
-using HyperLiquid.Net.Interfaces.Clients.SpotApi;
 using HyperLiquid.Net.Clients.BaseApi;
+using HyperLiquid.Net.Interfaces.Clients.SpotApi;
+using HyperLiquid.Net.Objects.Models;
+using HyperLiquid.Net.Utils;
+using System;
+using System.Data.Common;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HyperLiquid.Net.Clients.SpotApi
 {
@@ -80,5 +81,28 @@ namespace HyperLiquid.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get User Vault Equities
+
+        public async Task<HttpResult<HyperLiquidUserVaultEquity[]>> GetUserVaultEquitiesAsync(string? address = null, CancellationToken ct = default)
+        {
+            if (address == null && _baseClient.AuthenticationProvider == null)
+                throw new ArgumentNullException(nameof(address), "Address needs to be provided if API credentials not set");
+
+            await HyperLiquidUtils.CheckBuilderFeeAsync(_baseClient.BaseClient).ConfigureAwait(false);
+
+            var parameters = new Parameters(HyperLiquidExchange._parameterSerializationSettings)
+            {
+                { "type", "userVaultEquities" },
+                { "user", address ?? _baseClient.AuthenticationProvider!.Key }
+            };
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "info", HyperLiquidExchange.RateLimiter.HyperLiquidRest, 2, false);
+            var result = await _baseClient.SendAsync<HyperLiquidUserVaultEquity[]>(request, parameters, ct).ConfigureAwait(false);
+            //return result.As<HyperLiquidUserVaultEquity[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<HyperLiquidUserVaultEquity[]>(result);
+            return HttpResult.Ok(result, result.Data);
+        }
+
+        #endregion
     }
 }

@@ -46,5 +46,18 @@ namespace HyperLiquid.Net.Interfaces.Clients.SpotApi
             decimal quantity,
             CancellationToken ct = default);
 
+        /// <summary>
+        /// Get user vault equities
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint/spot#retrieve-a-users-token-balances" /><br />
+        /// Endpoint:<br />
+        /// POST /info (type: userVaultEquities)
+        /// </para>
+        /// </summary>
+        /// <param name="address">["<c>user</c>"] Address to request equities for. If not provided will use the address provided in the API credentials</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<HyperLiquidUserVaultEquity[]>> GetUserVaultEquitiesAsync(string? address = null, CancellationToken ct = default);
+
     }
 }

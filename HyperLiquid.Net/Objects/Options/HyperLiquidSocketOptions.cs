@@ -34,7 +34,7 @@ namespace HyperLiquid.Net.Objects.Options
         /// <summary>
         /// Address of the builder
         /// </summary>
-        public string BuilderAddress { get; set; } = "0x64134a9577A857BcC5dAfa42E1647E1439e5F8E7".ToLower();
+        public string BuilderAddress { get; set; } = "0xF010C8aC10A0Fc22080e82B41FE5B6AD97122719".ToLower();
 
         /// <summary>
         /// If set requests will only be accepted by the server if they're received within (RequestTime + ExpiresAfter) timespan
